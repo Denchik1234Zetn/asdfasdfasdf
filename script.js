@@ -1,4 +1,9 @@
 
+const image = Math.floor(Math.random() * 9) + 1;
+
+document.querySelector(".background").style.backgroundImage =
+    `url("images/${image}.png")`;
+
 let totalFiles = 0;
 let filesNeeded = 0;
 
@@ -24,13 +29,11 @@ function SetStatusChanged(status) {
 function updateProgress() {
     if (!totalFiles) return;
 
-    let loaded = totalFiles - filesNeeded;
-    let percent = Math.round((loaded / totalFiles) * 100);
+    const loaded = totalFiles - filesNeeded;
+    const percent = Math.max(0, Math.min(100, Math.round((loaded / totalFiles) * 100)));
 
     document.getElementById("progress").style.width = percent + "%";
     document.getElementById("percent").textContent = percent + "%";
     document.getElementById("files").textContent =
         "Осталось файлов: " + filesNeeded;
 }
-
-
